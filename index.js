@@ -1,41 +1,40 @@
 const display = document.getElementById("display");
 const resultContainer = document.getElementById("result-container");
-
 const result = document.getElementById("result");
 
-
-function appendToDisplay(character){
+// Append character to the input field
+function appendToDisplay(character) {
     display.value += character;
 }
 
-function DeleteLastCharacter(){
-    resultContainer.style = "display: none";
+// Delete the last character from the input field
+function DeleteLastCharacter() {
+    resultContainer.style = "display: none"; // Hide result when modifying input
     display.value = display.value.slice(0, -1);
 }
 
-function clearDisplay(){
-    resultContainer.style = "display: none";
+// Clear the input and result fields
+function clearDisplay() {
+    resultContainer.style = "display: none"; // Hide result when clearing
     display.value = "";
     result.value = "";
 }
 
-function calculate(){
+// Perform calculation
+function calculate() {
     let input = display.value;
+
+    // Replace "mod" with "%" for modulus operations
     let newInput = input.replace(/mod/g, "%");
    
-    if (newInput){
-        resultContainer.style = "display: block";
-    }else{
-        resultContainer.style = "display: none";
-    }
+    // Show or hide result container based on input
+    resultContainer.style = newInput ? "display: block" : "display: none";
 
-    
-    try{
+    try {
+        // Evaluate the expression and display the result
         result.value = "=" + eval(newInput);
-    }
-    catch(error){
+    } catch (error) {
+        // Display error name if the expression is invalid
         result.value = error.name;
     }
-   
-   
 }
